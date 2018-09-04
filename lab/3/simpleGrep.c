@@ -14,18 +14,28 @@ int simpleGrep(char *f, char *word, int caso)
     }
     while(fgets(currLine, 512, openFile)!=NULL)
     {
-        if(strstr(currLine,word)!=NULL)
-	{
-	    printf("\n %s \n",currLine);
-	    count++;
+        if(caso!=2){
+	    if(strstr(currLine,word)!=NULL)
+	    {
+	        printf("\n %s \n",currLine);
+	        count++;
+	    }
+	    line++;
 	}
-	line++;
+	else
+	{
+	    if(strstr(currLine,word)==NULL)
+	    {
+	        printf("\n %s \n",currLine);
+	    }
+	    line++;
+	}
     }
-    if(count==0)
+    if(caso!=2 && count==0)
     {
 	printf("No match found! \n");
     }
-    if(caso)
+    if(caso==1)
     {
 	printf("Times the word was found: %d \n", count);
     }
@@ -41,8 +51,21 @@ int main(int argc, char *argv[]){
     }
     else if(argc == 4)
     {
-        printf("The file to open is %s the word to search is %s and the action to do is %s\n ",argv[1], argv[2], argv[3]);
-        simpleGrep(argv[1], argv[2], 1);
+	if(strcmp(argv[3],"count")==0)
+        {
+            printf("The file to open is %s the word to search is %s and the action to do is %s\n ",argv[1], argv[2], argv[3]);
+            simpleGrep(argv[1], argv[2], 1);
+	}
+	else if(strcmp(argv[3],"invert")==0)
+	{
+	    printf("The file to open is %s the word to search is %s and the action to do is %s \n",
+		argv[1],argv[2],argv[3]);
+	    simpleGrep(argv[1],argv[2],2);
+	}
+	else
+	{
+	    printf("Last argument unkwown! \n");
+	}
     }
     else if(argc>3)
     {
