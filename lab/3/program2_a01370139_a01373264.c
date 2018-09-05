@@ -1,7 +1,13 @@
+/*Team 11 Carlos Carbajal - Rodrigo Cuevas*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+/*<summary>
+*Will try to read the content of the file, in case of failure, it will notify the user
+*</summary>
+*<param name="fileToRead">The filename to be read and displayed</param>
+*/
 int tryRead(char *fileToRead)
 {
     FILE *openFile;
@@ -20,7 +26,11 @@ int tryRead(char *fileToRead)
         return(0);
     }
 }
-
+/*<summary>
+*Will read the content of the file, and print 20 lines waiting for an input to continue and show the next 20
+*</summary>
+*<param name="fileToRead">The filename to be read and displayed</param>
+*/
 int read20(char *fileToRead)
 {
     FILE *openFile;
@@ -47,7 +57,11 @@ int read20(char *fileToRead)
     }
     fclose(openFile);
 }
-
+/*<summary>
+*Will call a function to verify that the file is readable and the call a function to read and print its contents
+*</summary>
+*<param name="fileToRead">The filename to be read and displayed</param>
+*/
 int readFile(char *fileToRead)
 {
     int tryReadResult;
@@ -65,7 +79,12 @@ int readFile(char *fileToRead)
         return(0);
     }
 }
-
+/*<summary>
+*Entry point of execution
+*</summary>
+*<param name="argc">number of arguments</param>
+*<param name="argv">array of arguments</param>
+*/
 int main(int argc, char *argv[])
 {
     /*
