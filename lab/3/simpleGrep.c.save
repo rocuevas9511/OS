@@ -1,10 +1,7 @@
-//Team 11 Carlos Carbajal - Rodrigo Cuevas 
-//libraries will use in this code
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-//declarartion of simpleGrep, needs name of file, word to search, and which extra argument to execute
 int simpleGrep(char *f, char *word, int caso)
 {
     FILE *openFile;
@@ -33,10 +30,6 @@ int simpleGrep(char *f, char *word, int caso)
 	    }
 	    line++;
 	}
-    }
-    if(caso!=2 && count==0)
-    {
-	printf("No match found! \n");
     }
     if(caso==1)
     {
