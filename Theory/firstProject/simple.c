@@ -3,12 +3,12 @@
 #include <linux/module.h>
 int simple_init(void)
 {
-	printk(KERN_INFO "Loading Module\n");
+	printk(KERN_INFO "Loading Module A01370139\n");
 	return 0;
 }
 void simple_exit(void)
 {
-	printk(KERN_INFO "Removing Module\n");
+	printk(KERN_INFO "Removing Module A01370139\n");
 }
 module_init(simple_init);
 module_exit(simple_exit);
