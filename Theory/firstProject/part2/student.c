@@ -26,7 +26,7 @@ int student_list_init(void)
 	for(i = 0; i < 5 ;i++) {
 		person = kmalloc(sizeof(*person), GFP_KERNEL);
 		person->grade = 10-i;
-		person->id = 01370139+(13*i);
+		person->id = 1370139+(13*i);
 		INIT_LIST_HEAD(&person->list);
 		list_add_tail(&person->list, &student_list);
 	}
