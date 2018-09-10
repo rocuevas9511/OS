@@ -23,7 +23,8 @@ int student_list_init(void)
 {
 	struct student *person;
 	int i;
-	for(i = 0; i < 5 ;i++) {
+	for(i = 0; i < 5 ;i++) 
+	{
 		person = kmalloc(sizeof(*person), GFP_KERNEL);
 		person->grade = 10-i;
 		person->id = 1370139+(13*i);
@@ -31,20 +32,20 @@ int student_list_init(void)
 		list_add_tail(&person->list, &student_list);
 	}
 
-	printk(KERN_INFO "Loading Module\n");
-	printk(KERN_INFO "This list be constructed\n");
-	
-	list_for_each_entry(person, &student_list, list) {
-		printk(KERN_INFO "Day: %d Month: %d Year: %d\n", person->grade, person->id);
-	}
+	printk(KERN_INFO "Loading Module\n");	
 
+	list_for_each_entry(person, &student_list, list) 
+	{
+		printk(KERN_INFO "Grade: %d ID: %d\n", person->grade, person->id);
+	}
 	return 0;
 }	
 
 void student_list_exit(void)
 {
 	struct student *person, *next;
-	list_for_each_entry_safe(person, next, &student_list, list) {
+	list_for_each_entry_safe(person, next, &student_list, list)
+	{
 		printk(KERN_INFO "Freeing node");
 		list_del(&person->list);
 		kfree(person);
