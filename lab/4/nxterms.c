@@ -5,6 +5,9 @@
  * Requirements: None
  * Usage:        Nxterms N, condition: N \in {1,...,5} 
  *
+ * Team 11
+ * Rodrigo Cuevas
+ * Carlos Carbajal
  */
 
 //Libraries we're going to use in this code
