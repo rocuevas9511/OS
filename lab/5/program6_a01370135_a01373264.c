@@ -11,13 +11,26 @@
 and outstr has enough space to hold a copy of instr. */
 void mycopy(char *instr, char *outstr)
 {
-//write your code here
+  for(int i=0; instr[i]!='\0' ;i++)
+  {
+    outstr[i]=instr[i];
+  }
 }
 
 /* slen returns the length of the string instr. instr is NULL-terminated */
 int slen(char *instr)
 {
-//write your code here
+  int len;
+  for(int i=0; ; i++)
+  {
+    if(instr[i]!='\0')
+    {
+      len++;
+    }
+    else
+      break;
+  }
+  return len;
 }
 
 int func3(char *str, char *w)
@@ -32,7 +45,7 @@ int func3(char *str, char *w)
     }
     else
       j = 0;
-      if (w[j] == '\0')
+    if (w[j] == '\0')
       break;
    }
     if (w[j] != '\0')
@@ -47,11 +60,11 @@ void main()
   char quote[256];
   char name_copy[80];
   int id;
-  
+
   strcpy(name,"Michael Daconta");
   strcpy(quote,"The C language has brought forth a new era in computing");
   printf("name is %s.\n",name);
-  
+
   mycopy(name,name_copy);
   printf("name_copy is %s.\n",name_copy);
   printf("the length of :\n%s\n is %d.\n",quote,slen(quote));
@@ -59,8 +72,8 @@ void main()
 
   id = func3(quote, "forth");
   if (id != -1)
-    // print results accordingly
+   NULL; // print results accordingly
   else
-    // print results accordingly
+    NULL;// print results accordingly
 }
 
