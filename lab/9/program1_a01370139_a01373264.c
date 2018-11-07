@@ -1,55 +1,63 @@
-#include <pthread.h>
-#include <semaphore.h>
+/**********************************************
+Lab #: 9
+
+Team #: 11
+
+Name1: Rodrigo Cuevas
+ID1: A01370139
+Name2: Carlos Carbajal
+ID2: A01373264
+
+Program Title: goodcnt
+
+Brief Description: good version of badcnt
+
+Compilation command:
+gcc -o goodcnt program1_a01370139_a01373264.c
+-lpthread -lrt
+
+Execution command:
+./goodcnt
+**********************************************/
+
+//libraries to import
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
 
+//NITER variable to multiply
 #define NITER 1000000
 
-int cnt = 0;
+void *count(void *arg);
 
-void * Count(void * a)
+//un
+unsigned int cnt;
+sem_t mutex;
+
+int main()
 {
-    int i, tmp;
-    for(i = 0; i < NITER; i++)
-    {
-        tmp = cnt;      /* copy the global cnt locally */
-        tmp = tmp+1;    /* increment the local copy */
-        cnt = tmp;      /* store the local value into the global cnt */ 
-    }
+  pthread_t tid1, tid2;
+  sem_init(&mutex, 0, 1);
+  pthread_create(&tid1, NULL, count, NULL);
+  pthread_create(&tid2, NULL, count, NULL);
+  pthread_join(tid1, NULL);
+  pthread_join(tid2, NULL);
+
+  if(cnt != (unsigned)NITER*2)
+    printf("BOOM! cnt= %d \n", cnt);
+  else
+    printf("OK cnt=%d\n", cnt);
+  exit(0);
 }
 
-int main(int argc, char * argv[])
+void *count(void *arg)
 {
-    pthread_t tid1, tid2;
-
-    if(pthread_create(&tid1, NULL, Count, NULL))
-    {
-      printf("\n ERROR creating thread 1");
-      exit(1);
-    }
-
-    if(pthread_create(&tid2, NULL, Count, NULL))
-    {
-      printf("\n ERROR creating thread 2");
-      exit(1);
-    }
-
-    if(pthread_join(tid1, NULL))	/* wait for the thread 1 to finish */
-    {
-      printf("\n ERROR joining thread");
-      exit(1);
-    }
-
-    if(pthread_join(tid2, NULL))        /* wait for the thread 2 to finish */
-    {
-      printf("\n ERROR joining thread");
-      exit(1);
-    }
-
-    if (cnt < 2 * NITER) 
-        printf("\n BOOM! cnt is [%d], should be %d\n", cnt, 2*NITER);
-    else
-        printf("\n OK! cnt is [%d]\n", cnt);
-  
-    pthread_exit(NULL);
+  int i;
+  for(i=0; i<NITER;i++){
+    sem_wait(&mutex);
+    cnt++;
+    sem_post(&mutex);
+  }
+  return NULL;
 }
