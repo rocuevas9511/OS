@@ -28,3 +28,30 @@ Execution command:
 #include <pthread.h>
 #include <semaphore.h>
 
+#define BUFF_SIZE 4
+
+char buffer[BUFF_SIZE];
+int nextIn = 0;
+int nextOut = 0;
+
+sem_t empty_slots;
+sem_t full_slots;
+
+void Put(char item)
+{
+  sem_wait(&empty_slots);
+  buffer[nextIn] = item;
+  nextIn = (nextIn + 1) % BUFF_SIZE;
+  printf("Producing %c ...\n", item);
+  sem_post(&full_slots);
+}
+
+void * Producer()
+{
+    int i;
+
+    for(i = 0; i < 10; i++)
+    {
+      Put((char)('A'+ i % 26));
+    }
+}
