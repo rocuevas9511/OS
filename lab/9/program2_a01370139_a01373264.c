@@ -28,6 +28,7 @@ Execution command:
 #include <pthread.h>
 #include <semaphore.h>
 
+//maximum buffer size
 #define BUFF_SIZE 4
 
 char buffer[BUFF_SIZE];
@@ -54,4 +55,39 @@ void * Producer()
     {
       Put((char)('A'+ i % 26));
     }
+}
+
+//this function will be called by the consumer
+void Get(){
+  //the item it'll consume
+  int item;
+  //the semaphore waits until it can start consuming
+  sem_wait(&full_slots);
+  //the buffer will throw the item to consume
+  item=buffer[nextOut];
+  //it checks which item follows
+  nextOut=(nextOut+1)%BUFF_SIZE;
+  printf("Consuming %c... \n", item);
+  sem_post(&empty_slots);
+}
+
+//consumer function
+void * Consumer(){
+  int i;
+  for (i=0;i<10;i++) Get();
+}
+
+int main(){
+  //threads we'll use
+  pthread_t tid1,tid2;
+  //semaphore initialization, both semaphores share memory
+  sem_init(&empty_slots, 1, 4);
+  sem_init(&full_slots, 1, 0);
+  //creation of threads
+  pthread_create(&tid1,NULL, Producer, NULL);
+  pthread_create(&tid2,NULL,Consumer, NULL);
+  //reunite data from both threads
+  pthread_join(tid1, NULL);
+  pthread_join(tid2, NULL);
+  exit(0);
 }
