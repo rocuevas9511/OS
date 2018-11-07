@@ -10,8 +10,8 @@ ID2: A01373264
 
 Program Title: Producer-consumer problem
 
-Brief Description: an implementation of the 
-producer-consumer problem with the code 
+Brief Description: an implementation of the
+producer-consumer problem with the code
 previously given
 
 Compilation command:
@@ -21,5 +21,10 @@ gcc -o proCon program2_a01370139_a01373264.c
 Execution command:
 ./proCon
 **********************************************/
+
+//libraries to import
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
+

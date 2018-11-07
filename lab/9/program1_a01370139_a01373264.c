@@ -29,10 +29,13 @@ Execution command:
 //NITER variable to multiply
 #define NITER 1000000
 
-//un
+//unsigned variable to save the counter
 unsigned int cnt;
+
+//our semaphore used throughout the program
 sem_t mutex;
 
+//function that threads will execute
 void *count(void *arg)
 {
   int i;
@@ -44,12 +47,17 @@ void *count(void *arg)
   return NULL;
 }
 
+
 int main()
 {
+  //threads we'll use
   pthread_t tid1, tid2;
+  //initialization of our semaphore -> mutex=1
   sem_init(&mutex, 0, 1);
+  //creation of the threads, function they'll execute
   pthread_create(&tid1, NULL, count, NULL);
   pthread_create(&tid2, NULL, count, NULL);
+  //we reunite the data of both threads
   pthread_join(tid1, NULL);
   pthread_join(tid2, NULL);
 
