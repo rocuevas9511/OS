@@ -29,11 +29,20 @@ Execution command:
 //NITER variable to multiply
 #define NITER 1000000
 
-void *count(void *arg);
-
 //un
 unsigned int cnt;
 sem_t mutex;
+
+void *count(void *arg)
+{
+  int i;
+  for(i=0; i<NITER;i++){
+    sem_wait(&mutex);
+    cnt++;
+    sem_post(&mutex);
+  }
+  return NULL;
+}
 
 int main()
 {
@@ -49,15 +58,4 @@ int main()
   else
     printf("OK cnt=%d\n", cnt);
   exit(0);
-}
-
-void *count(void *arg)
-{
-  int i;
-  for(i=0; i<NITER;i++){
-    sem_wait(&mutex);
-    cnt++;
-    sem_post(&mutex);
-  }
-  return NULL;
 }
