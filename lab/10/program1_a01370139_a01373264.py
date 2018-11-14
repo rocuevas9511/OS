@@ -1,5 +1,6 @@
-#!/user/bin/python3
+#!/user/bin/env python
 # -*- coding: utf-8 -*-
+
 """
 Created on Mon Nov 12 19:18:17 2018
 
