@@ -26,10 +26,10 @@ def readFile(file):
 
 def sortP(arr1):
     for i in range(len(arr1)): 
-        idx = i 
+	idx = i 
 	for j in range(i+1, len(arr1)): 
-	    if arr1[idx] > arr1[j]: 
-	        idx = j 
+		if arr1[idx] > arr1[j]:
+			idx = j 
 	arr1[i], arr1[idx] = arr1[idx], arr1[i] 
 	bArr[i], bArr[idx] = bArr[idx], bArr[i]
 
