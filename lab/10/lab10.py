@@ -25,14 +25,13 @@ def readFile(file):
     f.close()
 
 def sortP(arr1):
-    for i in range(len(arr1)): 
-        idx = i 
-	for j in range(i+1, len(arr1)): 
-	    if arr1[idx] > arr1[j]: 
-	        idx = j 
-	arr1[i], arr1[idx] = arr1[idx], arr1[i] 
-	bArr[i], bArr[idx] = bArr[idx], bArr[i]
-
+    for i in range(len(arr1)):
+        idx=i
+        for j in range(i+1, len(arr1)):
+            if arr1[idx] > arr1[j]:
+                idx = j
+        arr1[i], arr1[idx] = arr1[idx], arr1[i]
+        bArr[i], bArr[idx] = bArr[idx], bArr[i]
 
 def fcfs(arr1):
     t=0
@@ -93,7 +92,7 @@ def priority(arr1,arr2):
 def main():
     if(len(s.argv)==3):
         readFile(s.argv[2])
-        print (bArr)
+        #print (bArr)
         if(s.argv[1]=="-fcfs"):
             print("You choosed the First-Come,"+
                   "First-Served algorithm, the file to open is: %s \n" %s.argv[2])
@@ -108,7 +107,7 @@ def main():
         if(s.argv[1]=="-p"):
             print("You choosed the Priority "+
                   "algorithm, the file to open is: %s \n" %s.argv[2])
-	    priority(bArr,pArr)
+            priority(bArr,pArr)
         else:
             print("****** UNKOWN COMMAND! ******")
     else:
