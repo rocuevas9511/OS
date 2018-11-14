@@ -25,6 +25,7 @@ def readFile(file):
     f.close()
 
 def sortP(arr1):
+<<<<<<< HEAD
     for i in range(len(arr1)):
         idx=i
         for j in range(i+1, len(arr1)):
@@ -32,6 +33,16 @@ def sortP(arr1):
                 idx = j
         arr1[i], arr1[idx] = arr1[idx], arr1[i]
         bArr[i], bArr[idx] = bArr[idx], bArr[i]
+=======
+    for i in range(len(arr1)): 
+	idx = i 
+	for j in range(i+1, len(arr1)): 
+		if arr1[idx] > arr1[j]:
+			idx = j 
+	arr1[i], arr1[idx] = arr1[idx], arr1[i] 
+	bArr[i], bArr[idx] = bArr[idx], bArr[i]
+
+>>>>>>> 7a37dbe3dec6efd6e4655c3b3cc8514200adae45
 
 def fcfs(arr1):
     t=0
