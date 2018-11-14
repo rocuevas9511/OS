@@ -24,6 +24,16 @@ def readFile(file):
         pArr.append(int(data[1]))
     f.close()
 
+def sortP(arr1):
+    for i in range(len(arr1)): 
+        idx = i 
+	for j in range(i+1, len(arr1)): 
+	    if arr1[idx] > arr1[j]: 
+	        idx = j 
+	arr1[i], arr1[idx] = arr1[idx], arr1[i] 
+	bArr[i], bArr[idx] = bArr[idx], bArr[i]
+
+
 def fcfs(arr1):
     t=0
     wait=0
@@ -60,6 +70,26 @@ def sjf(arr1):
     print("Av. Turnaround time: " + str(turn/len(arr1))
           +"\n"+ "Av. Waiting time: "+ str(wait/len(arr1)) +"\n")
 
+
+def priority(arr1,arr2):
+    sortP(arr2)
+    t=0
+    wait=0
+    turn=0
+    for i in range(len(arr1)):
+        wait+=t
+        waitS.append(t)
+        t+=arr1[i]
+        turn+=t
+        pStr.append(("P%d[%d] |"%(i,arr1[i])))
+        turnS.append(t)
+
+    print(separator.join(pStr))
+    print(turnS)
+    print(waitS)
+    print("Av. Turnaround time: " + str(turn/len(arr1))
+          +"\n"+ "Av. Waiting time: "+ str(wait/len(arr1)) +"\n")
+
 def main():
     if(len(s.argv)==3):
         readFile(s.argv[2])
@@ -78,6 +108,7 @@ def main():
         if(s.argv[1]=="-p"):
             print("You choosed the Priority "+
                   "algorithm, the file to open is: %s \n" %s.argv[2])
+	    priority(bArr,pArr)
         else:
             print("****** UNKOWN COMMAND! ******")
     else:
